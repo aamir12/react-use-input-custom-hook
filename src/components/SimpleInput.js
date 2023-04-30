@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import useInput from '../hooks/use-input';
-
-const checkIsEmpty = (value) => {
-  return value.trim() !== '';
-};
-
-const checkEmail = (value) => {
-  return (
-    value.trim() !== '' &&
-    value.toLowerCase().match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
-  );
-};
+import { checkIsEmpty, checkEmail } from '../syncValidation';
 
 const SimpleInput = (props) => {
   const [isSubmit, setIsSubmit] = useState(false);
