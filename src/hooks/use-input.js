@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const useInput = (validate) => {
+const useInput = (isSubmit, validate) => {
   const [enterField, setEnteredField] = useState('');
   const [enteredFieldIsTouched, setEnteredFieldIsTouched] = useState(false);
 
   const enteredFieldIsValid = validate(enterField);
-  const fieldHasError = !enteredFieldIsValid && enteredFieldIsTouched;
+  const fieldHasError =
+    !enteredFieldIsValid && (enteredFieldIsTouched || isSubmit);
 
   const fieldInputChangeHandler = (event) => {
     setEnteredField(event.target.value);
@@ -18,19 +19,18 @@ const useInput = (validate) => {
   const reset = () => {
     setEnteredField('');
     setEnteredFieldIsTouched(false);
-  }
+  };
 
   return {
-    changeHandler:fieldInputChangeHandler,
-    blurHandler:fieldInputBlurHandler,
-    value:enterField,
+    changeHandler: fieldInputChangeHandler,
+    blurHandler: fieldInputBlurHandler,
+    value: enterField,
     hasError: fieldHasError,
-    isValid:enteredFieldIsValid,
-    isTouched : enteredFieldIsTouched,
+    isValid: enteredFieldIsValid,
+    isTouched: enteredFieldIsTouched,
     reset,
-    touchHandler:setEnteredFieldIsTouched
-  }
-
-}
+    touchHandler: setEnteredFieldIsTouched,
+  };
+};
 
 export default useInput;
