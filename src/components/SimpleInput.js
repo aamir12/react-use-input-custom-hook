@@ -38,6 +38,7 @@ const SimpleInput = (props) => {
   const resetForm = () => {
     emailReset();
     nameReset();
+     setIsSubmit(false);
   };
 
   const formSubmissionHandler = (event) => {
